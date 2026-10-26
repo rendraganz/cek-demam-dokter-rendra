@@ -2,6 +2,9 @@
 
 Website statis HTML, CSS, dan JavaScript untuk deploy di GitHub Pages. Tidak membutuhkan build step atau backend.
 
+## Link
+[Kunjungi Cek Demam Dokter Rendra](https://rendraganz.github.io/cek-demam-dokter-rendra/)
+
 ## Fitur
 - Dashboard dan gambaran siklus Retrieve, Reuse, Revise, Retain
 - Form subjek dan 14 indikator gejala (G1–G14)
