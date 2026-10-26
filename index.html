@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#155eef">
+  <title>DokterRendra - Spesialis Cek Demam</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">D</div>
+        <div><strong>DokterRendra - Spesialis Cek Demam</strong><span>Clinical Decision Support</span></div>
+      </div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+      <button class="nav-item" data-view="diagnosis"><span>⌕</span> Diagnosis</button>
+      <button class="nav-item" data-view="history"><span>◷</span> Riwayat Diagnosis</button>
+      <button class="nav-item" data-view="knowledge"><span>▤</span> Basis Kasus</button>
+      <div class="sidebar-bottom">
+        <div class="mini-avatar">CM</div><div><strong>CEO Muda</strong><span>Mode tanpa perasaan</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Buka menu">☰</button>
+        <div><span class="eyebrow">SISTEM PENUNJANG KEPUTUSAN</span><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="top-actions"><span class="status-dot"></span><span class="status-text">Prototype aktif</span><div class="top-avatar">A</div></div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-row"><div><h2>Selamat datang 👋</h2><p class="muted">Ringkasan sistem Case-Based Reasoning untuk pembelajaran.</p></div><button class="btn primary" data-go="diagnosis">＋ Mulai diagnosis</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon blue">▤</div><span class="stat-label">Kasus referensi</span><strong id="statCases">4</strong><small>Kasus awal P1–P4</small></article>
+          <article class="stat-card"><div class="stat-icon violet">⌕</div><span class="stat-label">Diagnosis tersimpan</span><strong id="statHistory">0</strong><small>Tersimpan di browser ini</small></article>
+          <article class="stat-card"><div class="stat-icon teal">✓</div><span class="stat-label">Siklus CBR</span><strong>4 tahap</strong><small>Retrieve · Reuse · Revise · Retain</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-head"><div><h3>Alur Case-Based Reasoning</h3><p class="muted">Cara sistem mencari kasus yang mirip</p></div><span class="pill">CBR</span></div>
+            <div class="cbr-flow">
+              <div class="flow-step"><div class="flow-num">01</div><div><strong>Retrieve</strong><p>Bandingkan gejala kasus baru dengan P1–P4 menggunakan cosine similarity.</p></div></div>
+              <div class="flow-step"><div class="flow-num">02</div><div><strong>Reuse</strong><p>Gunakan label kasus referensi dengan nilai kemiripan tertinggi sebagai hasil simulasi.</p></div></div>
+              <div class="flow-step"><div class="flow-num">03</div><div><strong>Revise</strong><p>Periksa dan koreksi hasil secara manual untuk demonstrasi akademik.</p></div></div>
+              <div class="flow-step"><div class="flow-num">04</div><div><strong>Retain</strong><p>Simpan kasus yang telah ditinjau ke basis kasus lokal browser.</p></div></div>
+            </div>
+          </article>
+          <article class="panel"><div class="panel-head"><div><h3>Basis kasus awal</h3><p class="muted">Label yang digunakan sebagai contoh</p></div></div><div id="caseOverview" class="case-overview"></div><div class="divider"></div><p class="helper">Kasus P1–P4 adalah data ilustrasi untuk demonstrasi metode, bukan data klinis tervalidasi.</p></article>
+        </div>
+        <div class="panel formula-panel"><div><h3>Metode perhitungan</h3><p class="muted">Cosine similarity mengukur kemiripan dua vektor gejala biner.</p></div><div class="formula">sim(x,y) = <span class="fraction"><span>x · y</span><span>‖x‖ × ‖y‖</span></span></div></div>
+      </section>
+
+      <section class="view" id="view-diagnosis">
+        <div class="section-intro"><h2>Form simulasi diagnosis</h2><p class="muted">Isi profil contoh dan pilih gejala untuk membandingkan kasus.</p></div>
+        <form id="diagnosisForm" class="panel">
+          <div class="form-section-title"><span class="section-number">1</span><div><h3>Informasi subjek</h3><p class="muted">Data ini hanya disimpan di browser lokal.</p></div></div>
+          <div class="form-grid">
+            <label>Nama pasien<input id="personName" name="personName" maxlength="80" placeholder="Contoh: Budi Santoso" required></label>
+            <label>Umur (tahun)<input id="personAge" name="personAge" type="number" min="0" max="120" placeholder="Contoh: 21" required></label>
+            <label>Jenis kelamin<select id="personGender" name="personGender" required><option value="">Pilih jenis kelamin</option><option>Laki-laki</option><option>Perempuan</option><option>Tidak disebutkan</option></select></label>
+          </div>
+          <div class="form-section-title symptoms-title"><span class="section-number">2</span><div><h3>Pilih gejala / indikator</h3><p class="muted">Centang indikator yang ada pada contoh kasus. Semua indikator diberi bobot sama.</p></div></div>
+          <div class="symptom-grid" id="symptomGrid"></div>
+          <div class="form-footer"><span class="helper" id="selectedCount">0 indikator dipilih</span><button class="btn primary" type="submit">Hitung kemiripan <span>→</span></button></div>
+        </form>
+        <div id="resultArea"></div>
+      </section>
+
+      <section class="view" id="view-history">
+        <div class="section-intro row-between"><div><h2>Riwayat diagnosis</h2><p class="muted">Data tersimpan di localStorage browser ini, bukan di server.</p></div><button class="btn secondary" id="exportHistory">⇩ Ekspor JSON</button></div>
+        <div class="panel"><div id="historyList"></div></div>
+      </section>
+
+      <section class="view" id="view-knowledge">
+        <div class="section-intro row-between"><div><h2>Basis kasus</h2><p class="muted">Kasus awal dan kasus yang ditambahkan melalui simulasi Retain.</p></div><button class="btn secondary" id="resetCases">Pulihkan kasus awal</button></div>
+        <div class="panel"><div id="knowledgeTable"></div></div>
+        <div class="panel revise-panel"><div class="panel-head"><div><h3>Revise & Retain</h3><p class="muted">Tinjau hasil terakhir, koreksi label simulasi, lalu simpan sebagai kasus baru.</p></div><span class="pill">Manual review</span></div><div id="reviewContent"><div class="empty-state">Jalankan simulasi diagnosis terlebih dahulu untuk meninjau dan menyimpan kasus.</div></div></div>
+      </section>
+      <footer>copyright rendraganz - tugas Sistem pendukung keputusan</footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
