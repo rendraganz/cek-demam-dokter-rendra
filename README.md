@@ -12,19 +12,6 @@ Website statis HTML, CSS, dan JavaScript untuk deploy di GitHub Pages. Tidak mem
 - Ekspor riwayat dan basis kasus ke JSON
 - Responsif untuk desktop dan ponsel
 
-## Cara deploy dengan GitHub Pages
-1. Buat repository baru di GitHub, misalnya `spk-cbr-dbd`.
-2. Unggah `index.html`, `style.css`, `app.js`, dan `README.md` ke root repository.
-3. Buka **Settings → Pages**.
-4. Pada **Build and deployment**, pilih **Deploy from a branch**.
-5. Pilih branch `main` dan folder `/(root)`, lalu klik **Save**.
-6. Tunggu proses deploy. URL biasanya berbentuk `https://USERNAME.github.io/NAMA-REPOSITORY/`.
-
-Setiap kali file di-commit/push ke branch terpilih, GitHub Pages akan menerbitkan versi terbaru.
-
-## Cara uji lokal
-Buka `index.html` langsung di browser. Untuk pengujian lebih menyerupai hosting, gunakan ekstensi Live Server pada editor kode.
-
 ## Data kasus awal
 - P1 / DBD-I: `[1,0,0,0,0,0,0,1,0,0,0,1,1,1]`
 - P2 / DBD-II: `[1,0,0,0,0,0,0,1,1,0,0,1,1,1]`
